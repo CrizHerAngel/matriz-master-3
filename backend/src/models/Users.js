@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('./database');
-/* IMPORTACION DE FK  roleID */
-/* const Role = require('./Role'); */
 
 const Users = db.define('users', {
   Id_user: {
@@ -12,33 +10,69 @@ const Users = db.define('users', {
   name: {
     type: Sequelize.STRING(50),
     allowNull: false,
+    validate: {
+      isAlpha: {
+        msg: 'Solo se permite letras',
+      },
+    },
   },
   lastname: {
     type: Sequelize.STRING(50),
     allowNull: false,
+    validate: {
+      isAlpha: {
+        msg: 'Solo se permite letras',
+      },
+    },
   },
   alias: {
     type: Sequelize.STRING(30),
     allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'No se permite dejar campo vacio',
+      },
+      isUppercase: {
+        msg: 'Solo se permiten MAYUSCÚLAS',
+      },
+    },
+    unique: {
+      args: true,
+      msg: 'Usuario con Alias ya registrado',
+    },
   },
   wiw: {
     type: Sequelize.STRING(20),
     allowNull: false,
+    validate: {
+      isAlpha: {
+        msg: 'Solo se permite letras',
+      },
+      notEmpty: {
+        msg: 'No se permite dejar campo vacio',
+      },
+      isLowercase: {
+        msg: 'Solo se permiten minúsculas',
+      },
+    },
+    unique: {
+      args: true,
+      msg: 'Usuario con WiW ya registrado',
+    },
   },
   role: {
     type: Sequelize.STRING(30),
     allowNull: false,
   },
-/*   roleId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Role,
-      key: 'id',
+  password: {
+    type: Sequelize.STRING(60),
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'El password no puede estar vacio',
+      },
     },
-  }, */
+  },
 });
 
-/* Users.belongsTo(Role); */
-
 module.exports = Users;
-

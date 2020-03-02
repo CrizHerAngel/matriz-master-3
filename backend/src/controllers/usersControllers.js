@@ -1,22 +1,26 @@
 const Usuarios = require('../models/Users');
-/* const Role = require('../models/Role') */
-//Agrega un Nuevo Usuario
+/* Importamos JWT-- pruebas de autenticacion */
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+//Agrega un Nuevo Usuario /***************** USUARIO DE REGISTRO A AUTENTICACION */ */
 exports.newUser = async (req, res, next) => {
   const user = new Usuarios(req.body);
+  user.password = await bcrypt.hash(req.body.password, 12); /* Coloque esto */
   try {
     await user.save();
     res.json({ mensaje: 'Agregado Correctamente' });
   } catch (error) {
     console.log(error);
+    res.json({ mensaje: 'Hubo un error' }); /* Esto tambien lo coloque */
     next();
   }
 };
 
 exports.listUsers = async (req, res, next) => {
   try {
-    const user = await Usuarios.findAll({
-    });
-    res.json(user)
+    const user = await Usuarios.findAll({});
+    res.json(user);
   } catch (error) {
     console.log(error);
     next();
@@ -43,6 +47,7 @@ exports.updateUser = async (req, res, next) => {
         alias: req.body.alias,
         wiw: req.body.wiw,
         role: req.body.role,
+        password: req.body.password,
       },
       {
         where: { Id_user: req.params.id },
@@ -66,3 +71,43 @@ exports.deleteUser = async (req, res, next) => {
   }
 };
 
+/*********************************** Modulo de Autenticacion de Users   ************************** */
+
+exports.authenticateUser = async (req, res, next) => {
+  const { alias, wiw, password } = req.body;
+  const usuario = await Usuarios.findOne({
+    where: {
+      alias: alias,
+      wiw: wiw,
+    },
+  });
+
+  if (!usuario) {
+    //Si el usuario no existe
+    await res.status(401).json({ mensaje: 'El usuario no existe' });
+    next();
+  } else {
+    // el usuario existe, verificar si password es correcto o incorrecto
+    if (!bcrypt.compareSync(password, usuario.password)) {
+      //Si el password es incorrecto
+      await res.status(401).json({ mensaje: 'Password incorrecto' });
+      next();
+    } else {
+      //password correcto, firmar el token
+      const token = jwt.sign(
+        {
+          alias: usuario.alias,
+          name: usuario.name,
+          wiw: usuario.wiw,
+          Id_user: usuario.Id_user,
+        },
+        'KEYSECRET',
+        {
+          expiresIn: '5h',
+        }
+      );
+      //Retornar el token
+      res.json({ token });
+    }
+  }
+};
