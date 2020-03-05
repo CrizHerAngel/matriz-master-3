@@ -1,32 +1,37 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, useContext, Fragment } from 'react';
 //Importar User axios
 import matrizAxios from '../../config/axios';
-
 /** Importanciones de LINKS */
 import { Link } from 'react-router-dom';
+/* ************* Importando CONTEXT */
+import { MATRIZContext } from '../../context/MATRIZContext';
 //Importando componentes
 import User from './User';
 
 function Users() {
   //Trabajar con el state donde users = state, saveUsers para guardar el state
   const [users, saveUsers] = useState([]);
+  /* *******Utilizar valores del context */
+  const [auth, saveAuth] = useContext(MATRIZContext);
+  /*  console.log(auth); */
+
+  /************************************************************************** */
   //QUery a la API
-  const consultarAPI = () => {
-    matrizAxios
-      .get('/users')
-      .then((response) => {
+  const consultarAPI = async () => {
+    const userConsulta = await matrizAxios.get('/users');
+    saveUsers(userConsulta.data);
+    /*  .then((response) => {
         console.log(response);
         saveUsers(response.data);
       })
       .catch((error) => {
         console.log(error);
-      });
+      }); */
   };
-
   //useEffect es similar a ComponetDiMount y willMount
   useEffect(() => {
     consultarAPI();
-  }, []); /* users */
+  }, []);
 
   return (
     <Fragment>

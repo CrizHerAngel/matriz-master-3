@@ -3,6 +3,9 @@ const router = express.Router();
 
 /* Import Controllers */
 const usersControllers = require('../controllers/usersControllers');
+const matrizControllers = require('../controllers/matrizControllers');
+/*********************** MIDDLEWARE  ************************** */
+/* const auth = require('../middleware/auth'); */
 
 module.exports = function() {
   //RUTAS
@@ -16,6 +19,9 @@ module.exports = function() {
   router.put('/users/:id', usersControllers.updateUser);
   /* Eliminar usuario */
   router.delete('/users/:id', usersControllers.deleteUser);
+  /********************************************************************************** */
+  router.post('/registro/matriz', matrizControllers.newMatriz);
+  router.get('/registro/matriz', matrizControllers.listMatriz);
 
   /********************************** USUARIOS AD ************************************************* */
   router.post('/login', usersControllers.authenticateUser);

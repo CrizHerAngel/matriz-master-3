@@ -20,10 +20,35 @@ const Navigation = () => {
           <i className="fas fa-users p-2" />
           Usuarios
         </Link>
-        <Link to={'/controls'} className="controls btn-systems">
-          <i className="fas fa-edit p-2" />
-          Controles
-        </Link>
+        <div className="btn-group dropright">
+          <Link
+            to={'/registro'}
+            className="registro btn-navigation btn-systems dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i className="fas fa-edit p-2" />
+            Registros
+          </Link>
+          <div className="dropdown-menu dropdown-menu-right ml-2">
+            <Link to={'/registro/matriz'} className="dropdown-item">
+              Matriz
+            </Link>
+            <Link to={'/registro/clientes'} className="dropdown-item">
+              Clientes
+            </Link>
+            <Link to={'/registro/sl'} className="dropdown-item">
+              Service Line
+            </Link>
+            <Link to={'/registro/areas'} className="dropdown-item">
+              Áreas
+            </Link>
+            <Link to={'/registro/cargo'} className="dropdown-item">
+              Cargo
+            </Link>
+          </div>
+        </div>
         <Link to={'/history'} className="history btn-systems ">
           <i className="fas fa-book p-2" />
           Historial
@@ -38,9 +63,7 @@ const Navigation = () => {
         </Link>
       </nav>
     </aside>
-   
   );
 };
 
 export default Navigation;
-

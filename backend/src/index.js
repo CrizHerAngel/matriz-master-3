@@ -9,6 +9,7 @@ const cors = require('cors');
 
 /* IMPORTANDO LOS MODELS */
 require('./models/Users');
+require('./models/Matriz');
 
 /***************SETTINGS DATABASE */
 db

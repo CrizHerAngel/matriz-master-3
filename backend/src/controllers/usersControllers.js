@@ -74,11 +74,10 @@ exports.deleteUser = async (req, res, next) => {
 /*********************************** Modulo de Autenticacion de Users   ************************** */
 
 exports.authenticateUser = async (req, res, next) => {
-  const { alias, wiw, password } = req.body;
+  const { alias, password } = req.body;
   const usuario = await Usuarios.findOne({
     where: {
       alias: alias,
-      wiw: wiw,
     },
   });
 
@@ -98,12 +97,11 @@ exports.authenticateUser = async (req, res, next) => {
         {
           alias: usuario.alias,
           name: usuario.name,
-          wiw: usuario.wiw,
           Id_user: usuario.Id_user,
         },
         'KEYSECRET',
         {
-          expiresIn: '5h',
+          expiresIn: '4h',
         }
       );
       //Retornar el token
