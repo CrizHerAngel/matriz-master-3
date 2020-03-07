@@ -1,27 +1,26 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import matrizAxios from '../../../config/axios';
 import Matriz from './Matriz';
+import FormMatriz from './FormMatriz';
 
-function MatrizList() {
+const MatrizList = () => {
   const [matriz, saveMatriz] = useState([]);
-
+  /* ******************************************************************************  */
   const consultarAPI = async () => {
     const matrizConsulta = await matrizAxios.get('/registro/matriz');
     saveMatriz(matrizConsulta.data);
   };
-
   useEffect(() => {
     consultarAPI();
   }, []);
-
+  /* ****************************************************************************** */
   return (
     <Fragment>
       <h1 className="display-4">Matriz</h1>
       <hr />
       <div className="row justify-content-between">
-        {/* <div className="col-4">One of two columns</div> */}
-        <Matriz />
-        <div className="col-6">
+        <FormMatriz onAddMatriz={consultarAPI} />
+        <div className="col">
           <div className="input-group mb-3">
             <input
               type="text"
@@ -34,12 +33,7 @@ function MatrizList() {
               <h4 className="d-inline ">
                 <b>Lista de Archivos Matriz</b>
               </h4>
-              <div className="btn-group float-right">
-                {/*  <Link to={'/users/new'} className="btn btn-sm btn-success">
-                  <i className="fas fa-user-plus fa-lg" />
-                  <b>Agregar</b>
-                </Link> */}
-              </div>
+              <div className="btn-group float-right" />
             </div>
             <table className="table table-sm table-hover mb-0">
               <thead className="thead-systems">
@@ -49,21 +43,17 @@ function MatrizList() {
                   <th colSpan="2">Acción</th>
                 </tr>
               </thead>
-              {/*  <tbody>
-                {users.map((user) => (
-                  <User
-                    key={user.Id_user}
-                    user={user}
-                    onDelete={consultarAPI}
-                  />
+              <tbody>
+                {matriz.map((matrix) => (
+                  <Matriz key={matrix.id_matrix} matrix={matrix} />
                 ))}
-              </tbody> */}
+              </tbody>
             </table>
           </div>
         </div>
       </div>
     </Fragment>
   );
-}
+};
 
 export default MatrizList;

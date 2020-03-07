@@ -54,7 +54,9 @@ a {
 .input-matriz{
 	font-size: 1em;
 	line-height: .75em;
+	flex: 1 0 100% !important;
 	vertical-align: -.0667em;
+	width: 100% !important;
 }
 
 /** GLOBALES **/
@@ -167,6 +169,11 @@ h2 {
 }
 @media (min-width: 768px) {
 	.btn {
+		display: inline-block;
+		flex: 0 0 auto;
+		width: auto;
+	}
+	.input-matriz {
 		display: inline-block;
 		flex: 0 0 auto;
 		width: auto;

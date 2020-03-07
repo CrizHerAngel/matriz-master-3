@@ -1,37 +1,25 @@
 import React, { Fragment } from 'react';
 
-function Matriz() {
+const Matriz = ({ matrix }) => {
+  const { id_matrix, matriz_name } = matrix;
   return (
     <Fragment>
-      <div className="col">
-        <div className="card my-card shadow-sm">
-          <div className="card-title">
-            <form className="m-0">
-              <legend className="m-0">Agregar nueva matriz:</legend>
-              <div className="campo ml-3">
-                <label className="ml-2">Nombre:</label>
-                <input
-                  className="campo"
-                  type="text"
-                  placeholder="Matriz"
-                  name="matriz_name"
-                  /* onChange={updateState} */
-                  autoFocus
-                />
-              </div>
-              <div className="campo ml-3">
-                <input
-                  type="submit"
-                  value="Agregar"
-                  className="btn btn-success btn-block input-matriz ml-2"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      <tr className="text-center">
+        <td>{id_matrix}</td>
+        <td>{matriz_name}</td>
+        <td>
+          <button className="btn btn-info">
+            <i className="fas fa-edit w-100 fa-lg" />
+          </button>
+        </td>
+        <td>
+          <button className="btn btn-danger">
+            <i className="fas fa-trash w-100 fa-lg" />
+          </button>
+        </td>
+      </tr>
     </Fragment>
   );
-}
+};
 
 export default Matriz;
