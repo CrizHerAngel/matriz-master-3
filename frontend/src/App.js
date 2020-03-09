@@ -1,5 +1,5 @@
-import React, { Fragment, useContext } from 'react';
-import { MATRIZContext, MATRIZProvider } from './context/MATRIZContext';
+import React, { Fragment } from 'react'; /* useContext */
+/* import { MATRIZContext, MATRIZProvider } from './context/MATRIZContext'; */
 /* ROUTING */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 /* Layouts */
@@ -20,16 +20,18 @@ import History from './components/history/History';
 import Preview from './components/preview/Preview';
 import Vobo from './components/vobo/Vobos';
 /* ******************************************************************************* */
-import Login from './components/auth/Login';
+/* import Login from './components/auth/Login'; */
+/* ********************************************************************** */
+import MatrizState from './context/matrices/matrizState';
 
 function App() {
   //Utilizar context en el componente
-  const [auth, saveAuth] = useContext(MATRIZContext);
-
+  /* const [auth, saveAuth] = useContext(MATRIZContext); */
   return (
-    <Router>
-      <Fragment>
-        <MATRIZProvider value={[auth, saveAuth]}>
+    <MatrizState>
+      <Router>
+        <Fragment>
+          {/* <MATRIZProvider value={[auth, saveAuth]}> */}
           <Header />
 
           <div className="grid contenedor contenido-principal">
@@ -56,16 +58,17 @@ function App() {
 
                 <Route exact path="/vobo" component={Vobo} />
                 {/********************************************************************************************* */}
-                <Route exact path="/login" component={Login} />
+                {/* <Route exact path="/login" component={Login} /> */}
               </Switch>
             </main>
           </div>
           <div className="contenedor position-absolute">
             <Footer />
           </div>
-        </MATRIZProvider>
-      </Fragment>
-    </Router>
+          {/*  </MATRIZProvider> */}
+        </Fragment>
+      </Router>
+    </MatrizState>
   );
 }
 export default App;

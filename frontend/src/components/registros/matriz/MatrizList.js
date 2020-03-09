@@ -1,25 +1,40 @@
-import React, { useState, Fragment, useEffect } from 'react';
-import matrizAxios from '../../../config/axios';
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+} from 'react'; /*useState, useEffect,   */
+/* import matrizAxios from '../../../config/axios'; */
+import matrizContext from '../../../context/matrices/matrizContext';
 import Matriz from './Matriz';
 import FormMatriz from './FormMatriz';
 
 const MatrizList = () => {
-  const [matriz, saveMatriz] = useState([]);
+  /*   const [matriz, saveMatriz] = useState([]); */
   /* ******************************************************************************  */
-  const consultarAPI = async () => {
+  /*   const consultarAPI = async () => {
     const matrizConsulta = await matrizAxios.get('/registro/matriz');
     saveMatriz(matrizConsulta.data);
   };
   useEffect(() => {
     consultarAPI();
-  }, []);
+  }, []); */
   /* ****************************************************************************** */
+
+  /* const matrices = []; */
+
+  const matrizsContext = useContext(matrizContext);
+  const { matrices, getMatrices } = matrizsContext;
+
+  useEffect(() => {
+    getMatrices();
+  }, []);
+
   return (
     <Fragment>
-      <h1 className="display-4">Matriz</h1>
+      <h1 className="display-4">Alta de Archivos Matriz</h1>
       <hr />
       <div className="row justify-content-between">
-        <FormMatriz onAddMatriz={consultarAPI} />
+        <FormMatriz /> {/* onAddMatriz={consultarAPI} */}
         <div className="col">
           <div className="input-group mb-3">
             <input
@@ -43,10 +58,21 @@ const MatrizList = () => {
                   <th colSpan="2">Acción</th>
                 </tr>
               </thead>
-              <tbody>
+              {/*  <tbody>
                 {matriz.map((matrix) => (
                   <Matriz key={matrix.id_matrix} matrix={matrix} />
                 ))}
+              </tbody> */}
+              <tbody>
+                {matrices.length === 0 ? (
+                  <tr>
+                    <td colSpan={3}>No existen matrices</td>
+                  </tr>
+                ) : (
+                  matrices.map((matriz) => (
+                    <Matriz key={matriz.id_matrix} matriz={matriz} />
+                  ))
+                )}
               </tbody>
             </table>
           </div>

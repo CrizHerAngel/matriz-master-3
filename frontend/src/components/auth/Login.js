@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+/* import React, { useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import matrizAxios from '../../config/axios';
 import { withRouter } from 'react-router-dom';
-
+ */
 //cONTEXT
-import { MATRIZContext } from '../../context/MATRIZContext';
+/* import { MATRIZContext } from '../../context/MATRIZContext'; */
 
-function Login(props) {
+/* function Login(props) {
   //Auth y Token
   const [auth, saveAuth] = useContext(MATRIZContext);
 
@@ -14,9 +14,9 @@ function Login(props) {
   const [credentials, saveCredentials] = useState({
     alias: '',
     password: '',
-  });
-  //Iniciar sesion en el server
-  const iniciarSesion = async (e) => {
+  }); */
+//Iniciar sesion en el server
+/*  const iniciarSesion = async (e) => {
     e.preventDefault();
     //autenticar al user
     try {
@@ -25,7 +25,7 @@ function Login(props) {
       const { token } = respuesta.data;
       localStorage.setItem('token', token);
 
-      //Colocarlo en el State
+      //Colocarlo en el State 
       saveAuth({
         token,
         auth: true,
@@ -44,9 +44,9 @@ function Login(props) {
       });
     }
   };
-
-  //ALMACENAR LO QUE ESCRIBE EL USUARIO EN STATE
-  const leerDatos = (e) => {
+ */
+//ALMACENAR LO QUE ESCRIBE EL USUARIO EN STATE
+/*  const leerDatos = (e) => {
     saveCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
@@ -89,5 +89,5 @@ function Login(props) {
     </div>
   );
 }
-
-export default withRouter(Login);
+ */
+/* export default withRouter(Login); */

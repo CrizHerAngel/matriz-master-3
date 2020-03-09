@@ -1,0 +1,7 @@
+export const GET_MATRICES = 'GET_MATRICES';
+export const ADD_MATRIZ = 'ADD_MATRIZ';
+export const VALIDATE_FORM_MATRIZ = 'VALIDATE_FORM_MATRIZ';
+export const DELETE_MATRIZ = 'DELETE_MATRIZ';
+export const MATRIZ_ACTUAL = 'MATRIZ_ACTUAL';
+export const UPDATE_MATRIZ = 'UPDATE_MATRIZ';
+export const RESET_MATRIZ = 'RESET_MATRIZ';

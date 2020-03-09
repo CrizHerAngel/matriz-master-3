@@ -304,21 +304,6 @@ h2 {
 	left: 0;
 	top: 1rem;
 }
-/*.navegacion a.clientes::before {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
-    content: "\f0c0";
-}
-.navegacion a.productos::before {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
-    content: "\f468";
-}
-.navegacion a.pedidos::before {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
-    content: "\f02d";
-} */
 
 /** Caja **/
 
@@ -596,4 +581,36 @@ h3.resumen-titulo {
 }
 /* .login .contenedor-formulario {
 
+} */
+/* ESTILOS NUEVOS Y RENOVADOS DE ALERTAS  Y DE MAS*/
+.text-danger {
+    color: #dc3545!important;
+    text-align: center;
+    /* padding: .5rem; */
+	font-weight: 700;
+    border-radius: .5rem;
+}
+/****************************************************/
+.mensaje {
+  font-weight: 900;
+  font-family: var(--textFont);
+  font-size: 1rem;
+  padding: .5rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  border: none;
+}
+.mensaje {
+  text-align: center;
+  font-size: 1.6rem;
+  border-radius: 0;
+}
+.mensaje:hover {
+  cursor: default;
+}
+/* p.error  {
+  max-width: 600px;
+  margin: 2rem auto 0 auto; 
+  background-color: rgb(170, 0, 0);
+  color: var(--white);
 } */
