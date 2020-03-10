@@ -5,11 +5,12 @@ const Matriz = ({ matriz }) => {
   /* { matrix } */
   /* const { id_matrix, matriz_name } = matrix; */
   const matrizsContext = useContext(matrizContext);
-  const { deleteMatriz, saveMatrizActual } = matrizsContext;
+  const { deleteMatriz, saveMatrizActual, getMatrices } = matrizsContext;
 
   //Funcion que se ejecuta cuando el usuario presion al el btn de eliminar
-  const matrizDelete = (id_matrix) => {
-    deleteMatriz(id_matrix);
+  const matrizDelete = (id) => {
+    deleteMatriz(id);
+    getMatrices();
   };
 
   //Extrae una matriz actual cuando el usuario desea editarla
@@ -20,7 +21,7 @@ const Matriz = ({ matriz }) => {
   return (
     <Fragment>
       <tr className="text-center">
-        <td>{matriz.id_matrix}</td>
+        {/*   <td>{matriz.id_matrix}</td> */}
         <td>{matriz.matriz_name}</td>
         <td>
           <button
@@ -33,7 +34,7 @@ const Matriz = ({ matriz }) => {
         <td>
           <button
             className="btn btn-danger"
-            onClick={() => matrizDelete(matriz.id_matrix)}
+            onClick={() => matrizDelete(matriz.id)}
           >
             <i className="fas fa-trash w-100 fa-lg" />
           </button>

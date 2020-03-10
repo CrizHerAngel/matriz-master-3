@@ -1,6 +1,8 @@
 import React, { useReducer } from 'react';
-import MatrizContext from './matrizContext';
-import MatrizReducer from './matrizReducer';
+import { v4 as uuidv4 } from 'uuid';
+/* import uuid from 'uuid'; */
+import matrizContext from './matrizContext';
+import matrizReducer from './matrizReducer';
 
 import {
   GET_MATRICES,
@@ -14,14 +16,10 @@ import {
 
 const MatrizState = (props) => {
   const matrices = [
-    { id_matrix: 1, matriz_name: 'LBU' },
-    { id_matrix: 2, matriz_name: 'VITRO' },
-    { id_matrix: 3, matriz_name: 'CCI' },
-    { id_matrix: 4, matriz_name: 'ALFA' },
-    { id_matrix: 5, matriz_name: 'ALLA' },
-    { id_matrix: 6, matriz_name: 'VETRO' },
-    { id_matrix: 7, matriz_name: 'CHBB' },
-    { id_matrix: 8, matriz_name: 'AUU' },
+    { id: 1, matriz_name: 'LBU' },
+    { id: 2, matriz_name: 'VITRO' },
+    { id: 3, matriz_name: 'CCI' },
+    { id: 4, matriz_name: 'ALFA' },
   ];
   const initialState = {
     matrices: [],
@@ -30,7 +28,7 @@ const MatrizState = (props) => {
   };
 
   /* Create dispatch and state */
-  const [state, dispatch] = useReducer(MatrizReducer, initialState);
+  const [state, dispatch] = useReducer(matrizReducer, initialState);
 
   //Obtener archivos Matriz
   const getMatrices = () => {
@@ -42,6 +40,7 @@ const MatrizState = (props) => {
 
   //Agregar una matriz
   const addMatriz = (matriz) => {
+    matriz.id = uuidv4();
     dispatch({
       type: ADD_MATRIZ,
       payload: matriz,
@@ -56,10 +55,10 @@ const MatrizState = (props) => {
   };
 
   //Eliminar Matriz x ID
-  const deleteMatriz = (id_matrix) => {
+  const deleteMatriz = (id) => {
     dispatch({
       type: DELETE_MATRIZ,
-      payload: id_matrix,
+      payload: id,
     });
   };
 
@@ -87,7 +86,7 @@ const MatrizState = (props) => {
   };
 
   return (
-    <MatrizContext.Provider
+    <matrizContext.Provider
       value={{
         matrices: state.matrices,
         errormatriz: state.errormatriz,
@@ -102,7 +101,7 @@ const MatrizState = (props) => {
       }}
     >
       {props.children}
-    </MatrizContext.Provider>
+    </matrizContext.Provider>
   );
 };
 

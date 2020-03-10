@@ -9,24 +9,12 @@ import Matriz from './Matriz';
 import FormMatriz from './FormMatriz';
 
 const MatrizList = () => {
-  /*   const [matriz, saveMatriz] = useState([]); */
-  /* ******************************************************************************  */
-  /*   const consultarAPI = async () => {
-    const matrizConsulta = await matrizAxios.get('/registro/matriz');
-    saveMatriz(matrizConsulta.data);
-  };
-  useEffect(() => {
-    consultarAPI();
-  }, []); */
-  /* ****************************************************************************** */
-
-  /* const matrices = []; */
-
   const matrizsContext = useContext(matrizContext);
   const { matrices, getMatrices } = matrizsContext;
 
   useEffect(() => {
     getMatrices();
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -70,7 +58,7 @@ const MatrizList = () => {
                   </tr>
                 ) : (
                   matrices.map((matriz) => (
-                    <Matriz key={matriz.id_matrix} matriz={matriz} />
+                    <Matriz key={matriz.id} matriz={matriz} />
                   ))
                 )}
               </tbody>

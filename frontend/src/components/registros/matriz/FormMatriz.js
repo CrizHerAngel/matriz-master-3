@@ -47,7 +47,7 @@ const FormMatriz = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     //Validar
-    if (matriz_name.trim() === '') {
+    if (matriz_name === '') {
       validateMatriz();
       return;
     }

@@ -31,7 +31,7 @@ export default (state, action) => {
       return {
         ...state,
         matrices: state.matrices.filter(
-          (matriz) => matriz.id_matrix !== action.payload
+          (matriz) => matriz.id !== action.payload
         ),
       };
     case MATRIZ_ACTUAL:

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const MatrizContext = createContext();
+const matrizContext = createContext();
 
-export default MatrizContext;
+export default matrizContext;
