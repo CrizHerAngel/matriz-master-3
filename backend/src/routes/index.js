@@ -22,7 +22,8 @@ module.exports = function() {
   /********************************************************************************** */
   router.post('/registro/matriz', matrizControllers.newMatriz);
   router.get('/registro/matriz', matrizControllers.listMatriz);
-
+  router.put('/registro/matriz/:id', matrizControllers.updateMatriz);
+  router.delete('/registro/matriz/:id', matrizControllers.deleteMatriz);
   /********************************** USUARIOS AD ************************************************* */
   router.post('/login', usersControllers.authenticateUser);
   return router;
