@@ -55,8 +55,8 @@ function Users() {
             <thead className="thead-systems">
               <tr className="text-center">
                 <th scope="col">Alias</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
+                <th scope="col">Nombre(s)</th>
+                <th scope="col">Apellido(s)</th>
                 <th scope="col">WiW</th>
                 <th scope="col">Rol</th>
                 <th colSpan="2">Acción</th>

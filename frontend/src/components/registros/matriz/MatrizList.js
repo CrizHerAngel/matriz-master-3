@@ -1,27 +1,20 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import matrizAxios from '../../../config/axios';
-/* import Swal from 'sweetalert2'; */
+import React, { Fragment, useContext, useEffect } from 'react';
+/* import matrizAxios from '../../../config/axios'; */
+import matrizContext from '../../../context/matrices/matrizContext';
 import Matriz from './Matriz';
-import FormMatriz from './FormMatriz';
 
-function MatrizList() {
-  const [matriz, saveMatriz] = useState([]);
-  /* *********************************************************************************** */
-  const consultarAPI = async () => {
-    const matrizConsulta = await matrizAxios.get('/registro/matriz');
-    saveMatriz(matrizConsulta.data);
-  };
+const MatrizList = () => {
+  const matrizsContext = useContext(matrizContext);
+  const { matrices, getMatrices } = matrizsContext;
 
   useEffect(() => {
-    consultarAPI();
+    getMatrices();
+    //eslint-disable-next-line
   }, []);
-  /* **************************************************************************************** */
+
   return (
     <Fragment>
-      <h1 className="display-4">Matriz</h1>
-      <hr />
       <div className="row justify-content-between">
-        <FormMatriz onAddMatriz={consultarAPI} />
         <div className="col">
           <div className="input-group mb-3">
             <input
@@ -40,15 +33,20 @@ function MatrizList() {
             <table className="table table-sm table-hover mb-0">
               <thead className="thead-systems">
                 <tr className="text-center">
-                  <th scope="col">#</th>
                   <th scope="col">Nombre</th>
                   <th colSpan="2">Acción</th>
                 </tr>
               </thead>
               <tbody>
-                {matriz.map((matrix) => (
-                  <Matriz key={matrix.id_matrix} matrix={matrix} />
-                ))}
+                {matrices.length === 0 ? (
+                  <tr>
+                    <td>No existen matrices</td>
+                  </tr>
+                ) : (
+                  matrices.map((matriz) => (
+                    <Matriz key={matriz.id_matrix} matriz={matriz} />
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -56,6 +54,6 @@ function MatrizList() {
       </div>
     </Fragment>
   );
-}
+};
 
 export default MatrizList;

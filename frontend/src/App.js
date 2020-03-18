@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; /* useContext */
+import React, { Fragment } from 'react';
 /* import { MATRIZContext, MATRIZProvider } from './context/MATRIZContext'; */
 /* ROUTING */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -14,57 +14,62 @@ import NewUser from './components/users/NewUser';
 import EditUser from './components/users/EditUser';
 
 import Registro from './components/registros/Registro';
-import MatrizList from './components/registros/matriz/MatrizList';
+import Matrices from './components/registros/matriz/Matrices';
 
 import History from './components/history/History';
 import Preview from './components/preview/Preview';
 import Vobo from './components/vobo/Vobos';
 /* ******************************************************************************* */
 /* import Login from './components/auth/Login'; */
-/* ********************************************************************** */
+/* ****************************************************************** */
+import MatrizState from './context/matrices/matrizState';
+
 function App() {
   //Utilizar context en el componente
-  /* const [auth, saveAuth] = useContext(MATRIZContext); */
+  /*   const [auth, saveAuth] = useContext(MATRIZContext);
+   */
   return (
-    <Router>
-      <Fragment>
-        {/* <MATRIZProvider value={[auth, saveAuth]}> */}
-        <Header />
+    <MatrizState>
+      <Router>
+        <Fragment>
+          {/*   <MATRIZProvider value={[auth, saveAuth]}> */}
+          <Header />
 
-        <div className="grid contenedor contenido-principal">
-          <Navigation />
+          <div className="grid contenedor contenido-principal">
+            <Navigation />
 
-          <main className="caja-contenido w-100 ">
-            {/* col-9 */}
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/home" component={Home} />
+            <main className="caja-contenido w-100 ">
+              {/* col-9 */}
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
 
-              <Route exact path="/matriz" component={Matriz} />
+                <Route exact path="/matriz" component={Matriz} />
 
-              <Route exact path="/users" component={Users} />
-              <Route exact path="/users/new" component={NewUser} />
-              <Route exact path="/users/edit/:id" component={EditUser} />
+                <Route exact path="/users" component={Users} />
+                <Route exact path="/users/new" component={NewUser} />
+                <Route exact path="/users/edit/:id" component={EditUser} />
 
-              <Route exact path="/registro" component={Registro} />
-              <Route exact path="/registro/matriz" component={MatrizList} />
+                <Route exact path="/registro" component={Registro} />
+                <Route exact path="/registro/matriz" component={Matrices} />
 
-              <Route exact path="/history" component={History} />
+                <Route exact path="/history" component={History} />
 
-              <Route exact path="/preview" component={Preview} />
+                <Route exact path="/preview" component={Preview} />
 
-              <Route exact path="/vobo" component={Vobo} />
-              {/********************************************************************************************* */}
-              {/* <Route exact path="/login" component={Login} /> */}
-            </Switch>
-          </main>
-        </div>
-        <div className="contenedor position-absolute">
-          <Footer />
-        </div>
-        {/*  </MATRIZProvider> */}
-      </Fragment>
-    </Router>
+                <Route exact path="/vobo" component={Vobo} />
+                {/********************************************************************* */}
+                {/* <Route exact path="/login" component={Login} /> */}
+              </Switch>
+            </main>
+          </div>
+          <div className="contenedor position-absolute">
+            <Footer />
+          </div>
+          {/* </MATRIZProvider> */}
+        </Fragment>
+      </Router>
+    </MatrizState>
   );
 }
 export default App;

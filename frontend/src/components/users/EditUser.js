@@ -14,7 +14,6 @@ function EditUser(props) {
     alias: '',
     wiw: '',
     role: '',
-    password: '',
   });
   //Query a la API (backend)
   const consultarAPI = async () => {
@@ -23,11 +22,10 @@ function EditUser(props) {
     //Colocar en el state
     dataUser(userConsulta.data);
   };
-  /* eslint-disable */
 
-  //useffect, cuando el componente carga
+  //useEffect es similar a ComponetDiMount y willMount
   useEffect(() => {
-    consultarAPI();
+    consultarAPI(); // eslint-disable-next-line
   }, []);
 
   //Funcion para leer los datos del form
@@ -37,7 +35,6 @@ function EditUser(props) {
       //obtener copia del state actual
       ...user,
       [e.target.name]: e.target.value,
-      /* [e.target.value ] : {selectRole:e.target.value} */
     });
     /*  console.log(user); */
   };
@@ -48,7 +45,7 @@ function EditUser(props) {
 
     //Enviar peticion Axios
     matrizAxios.put(`/users/${user.Id_user}`, user).then((res) => {
-      if (res.data.code === 11000) {
+      if (res.data === 404) {
         Swal.fire({
           type: 'error',
           title: 'Hubo un error',
@@ -67,7 +64,7 @@ function EditUser(props) {
   /* Validar Usuario */
   const validarUser = () => {
     //Aplicar destructuring
-    const { name, lastname, alias, wiw, role, password } = user;
+    const { name, lastname, alias, wiw, role } = user;
     //Revisar que las propiedas del state tenga contenido
     /* console.log(user); */
     let valido =
@@ -75,8 +72,7 @@ function EditUser(props) {
       !lastname.length ||
       !alias.length ||
       !wiw.length ||
-      !role.length ||
-      !password.length;
+      !role.length;
     //regresa un true o false
     return valido;
   };
@@ -88,7 +84,7 @@ function EditUser(props) {
         <legend>Llena todos los campos</legend>
 
         <div className="campo">
-          <label>Nombre:</label>
+          <label>Nombre(s):</label>
           <input
             type="text"
             placeholder="Nombre Usuario"
@@ -99,7 +95,7 @@ function EditUser(props) {
         </div>
 
         <div className="campo">
-          <label>Apellidos:</label>
+          <label>Apellido(s):</label>
           <input
             type="text"
             placeholder="Apellidos Usuario"
@@ -130,17 +126,6 @@ function EditUser(props) {
             value={user.wiw}
           />
         </div>
-        {/* 
-        <div className="campo">
-          <label>Password:</label>
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={updateState}
-            value={user.password}
-          />
-        </div> */}
 
         <div className="form-group campo">
           <label htmlFor="inputState">Role</label>

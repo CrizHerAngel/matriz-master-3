@@ -1,12 +1,12 @@
 const Usuarios = require('../models/Users');
 /* Importamos JWT-- pruebas de autenticacion */
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+/* const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt'); */
 
 //Agrega un Nuevo Usuario /***************** USUARIO DE REGISTRO A AUTENTICACION */ */
 exports.newUser = async (req, res, next) => {
   const user = new Usuarios(req.body);
-  user.password = await bcrypt.hash(req.body.password, 12); /* Coloque esto */
+  /* Coloque esto */
   try {
     await user.save();
     res.json({ mensaje: 'Agregado Correctamente' });
@@ -47,13 +47,12 @@ exports.updateUser = async (req, res, next) => {
         alias: req.body.alias,
         wiw: req.body.wiw,
         role: req.body.role,
-        password: req.body.password,
       },
       {
         where: { Id_user: req.params.id },
       }
     );
-    res.json(req.body);
+    res.json(user);
   } catch (error) {
     console.log(error);
     res.send(error);
@@ -70,14 +69,12 @@ exports.deleteUser = async (req, res, next) => {
     next();
   }
 };
-
-/*********************************** Modulo de Autenticacion de Users   ************************** */
-
-exports.authenticateUser = async (req, res, next) => {
+/******************************************************************************************************* */
+/* exports.authenticateUser = async (req, res, next) => {
   const { alias, password } = req.body;
   const usuario = await Usuarios.findOne({
     where: {
-      alias: alias,
+      alias: alias
     },
   });
 
@@ -101,11 +98,11 @@ exports.authenticateUser = async (req, res, next) => {
         },
         'KEYSECRET',
         {
-          expiresIn: '4h',
+          expiresIn: '5h',
         }
       );
       //Retornar el token
       res.json({ token });
     }
   }
-};
+}; */

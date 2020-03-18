@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+/* const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
   //Autorizacion por el header
@@ -26,3 +26,4 @@ module.exports = (req, res, next) => {
   }
   next();
 };
+ */

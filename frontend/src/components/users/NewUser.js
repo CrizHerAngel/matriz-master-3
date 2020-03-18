@@ -11,7 +11,6 @@ function NewUser({ history }) {
     alias: '',
     wiw: '',
     role: '',
-    password: '' /* Agrege manualmente */,
   });
   //Funcion para leer los datos del form
   const updateState = (e) => {
@@ -20,20 +19,20 @@ function NewUser({ history }) {
       //obtener copia del state actual
       ...user,
       [e.target.name]: e.target.value,
+      /* [e.target.value ] : {selectRole:e.target.value} */
     });
-    /*  console.log(user); */
   };
 
-  //Añade en la REST API un cliente nuevo
+  //Añade en la REST API un usuario nuevo
   const addUser = (e) => {
     e.preventDefault();
     //Enviar peticion a AXIOS
     matrizAxios.post('/users', user).then((res) => {
-      if (res.data.code === 11000) {
+      if (!res.data) {
         Swal.fire({
-          type: 'error',
-          title: 'Hubo un error',
-          text: 'El usuario ya esta registrado',
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Hubo un error',
         });
       } else {
         console.log(res.data);
@@ -47,7 +46,7 @@ function NewUser({ history }) {
   /* Validar Usuario */
   const validarUser = () => {
     //Aplicar destructuring
-    const { name, lastname, alias, wiw, role, password } = user;
+    const { name, lastname, alias, wiw, role } = user;
     //Revisar que las propiedas del state tenga contenido
     /* console.log(user); */
     let valido =
@@ -55,8 +54,7 @@ function NewUser({ history }) {
       !lastname.length ||
       !alias.length ||
       !wiw.length ||
-      !role.length ||
-      !password.length;
+      !role.length;
     //regresa un true o false
     return valido;
   };
@@ -68,7 +66,7 @@ function NewUser({ history }) {
         <legend>Llena todos los campos</legend>
 
         <div className="campo">
-          <label>Nombre:</label>
+          <label>Nombre(s):</label>
           <input
             type="text"
             placeholder="Nombre Usuario"
@@ -79,7 +77,7 @@ function NewUser({ history }) {
         </div>
 
         <div className="campo">
-          <label>Apellidos:</label>
+          <label>Apellidos(s):</label>
           <input
             type="text"
             placeholder="Apellidos Usuario"
@@ -107,16 +105,6 @@ function NewUser({ history }) {
             onChange={updateState}
           />
         </div>
-        <div className="campo">
-          <label>Password:</label>
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={updateState}
-          />
-        </div>
-
         <div className="form-group campo">
           <label htmlFor="inputState">Role</label>
           <select name="role" className="campo" onChange={updateState}>

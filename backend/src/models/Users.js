@@ -11,8 +11,8 @@ const Users = db.define('users', {
     type: Sequelize.STRING(50),
     allowNull: false,
     validate: {
-      isAlpha: {
-        msg: 'Solo se permite letras',
+      notEmpty: {
+        msg: 'No  se permite campo vacío',
       },
     },
   },
@@ -20,8 +20,8 @@ const Users = db.define('users', {
     type: Sequelize.STRING(50),
     allowNull: false,
     validate: {
-      isAlpha: {
-        msg: 'Solo se permite letras',
+      notEmpty: {
+        msg: 'No  se permite campo vacío',
       },
     },
   },
@@ -64,15 +64,8 @@ const Users = db.define('users', {
     type: Sequelize.STRING(30),
     allowNull: false,
   },
-  password: {
-    type: Sequelize.STRING(60),
-    allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'El password no puede estar vacio',
-      },
-    },
-  },
 });
+
+/* Users.belongsTo(Role); */
 
 module.exports = Users;
